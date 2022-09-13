@@ -17,30 +17,25 @@ store_list = list(map(int, input().split()))
 # 우유 개수 카운트
 cnt = 0
 
+# 영학이가 다음에 마실 우유?
+milk = 0
+
 # 0: 딸기우유 가게 / 1: 초코우유 가게 / 2: 바나나우유 가게
 # 이 외의 정수는 없음
-for i in range(len(store_list)):
-    if store_list[i] == 0:
-        if i > 0:
-            if store_list[i-1] == 2:
-                cnt += 1
-            else:
-                i += 1
-        else:
-            cnt += 1
-    elif store_list[i] == 1:
-        if i > 0:
-            if store_list[i-1] == 0:
-                cnt += 1
-        else:
-            i += 1
-    elif store_list[i] == 2:
-        if i > 1:
-            if (store_list[i-1] == 1 and store_list[i-2] == 0):
-                cnt += 1
-        else:
-            i += 1
+for i in store_list:
+    # 처음은 무조건 0으로 시작하여야 함 - 우유 개수도 0, 마지막 우유도 0으로 시작
+    if i == milk:
+        cnt += 1
+        milk += 1
+    # 딸기우유를 마셨다면 다음 가게들을 순서대로 찾아야 함
+    # -> if 조건에 부합하면 계속 카운트해나감
+
+    # 순서대로 카운트가 되지 않으면 건너뛰어야 함
+    # -> if 조건에 부합하지 않으면 다시 for문 돌면서 i 값이 바뀌므로 해결됨
+
+    # 바나나우유까지 마셨다면 다시 딸기우유가게를 찾아야함 (3이 되면 0으로 리셋)
+    if milk == 3:
+        milk = 0
 
 print(cnt)
-
 ## 해당 문제 1 1 0 2 1 일때 0 다음 2는 건너 뛰고 1을 카운트해야하는 로직 추가필요
