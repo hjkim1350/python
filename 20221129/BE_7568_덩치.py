@@ -9,9 +9,12 @@
 
 N = int(input())
 nums = []
+result = []
+
 
 for _ in range(N):
-    nums.append(input().split())
+    weight, height = map(int, input().split())
+    nums.append((weight, height))
 
 for i in range(N):
     score = 1
@@ -19,4 +22,6 @@ for i in range(N):
     for j in range(N):
         if nums[i][0] < nums[j][0] and nums[i][1] < nums[j][1]:
             score += 1
-    print(score, end=" ")
+    result.append(score)
+
+print(*result)
